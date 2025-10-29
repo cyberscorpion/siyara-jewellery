@@ -7,6 +7,7 @@ export interface Product {
   description: string;
   material: string;
   isNew?: boolean;
+  tags: string[];
 }
 
 export type Category = 'Necklaces' | 'Earrings' | 'Bracelets' | 'Rings' | 'Sets' | 'All';

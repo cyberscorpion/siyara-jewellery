@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HomeView } from '@/components/HomeView';
 import { WishlistView } from '@/components/WishlistView';
+import { CollectionsView } from '@/components/CollectionsView';
 import { ProductDetail } from '@/components/ProductDetail';
 import { PRODUCTS } from '@/lib/products';
 import { Product, Category } from '@/lib/types';
@@ -26,7 +27,7 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
-  const [currentView, setCurrentView] = useState<'home' | 'wishlist'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'wishlist' | 'collections'>('home');
 
   const handleToggleWishlist = (productId: string) => {
     setWishlistedIds((current) => {
@@ -51,6 +52,10 @@ function App() {
     setCurrentView(currentView === 'wishlist' ? 'home' : 'wishlist');
   };
 
+  const handleCollectionsClick = () => {
+    setCurrentView('collections');
+  };
+
   const handleLogoClick = () => {
     setCurrentView('home');
     setSelectedCategory('All');
@@ -63,7 +68,9 @@ function App() {
           wishlistCount={wishlistedIds.length}
           onWishlistClick={handleWishlistClick}
           onLogoClick={handleLogoClick}
+          onCollectionsClick={handleCollectionsClick}
           isWishlistView={currentView === 'wishlist'}
+          currentView={currentView}
         />
 
         <main className="mt-8">
@@ -72,6 +79,13 @@ function App() {
               products={PRODUCTS}
               selectedCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
+              onProductClick={handleProductClick}
+              wishlistedIds={wishlistedIds}
+              onToggleWishlist={handleToggleWishlist}
+            />
+          ) : currentView === 'collections' ? (
+            <CollectionsView
+              products={PRODUCTS}
               onProductClick={handleProductClick}
               wishlistedIds={wishlistedIds}
               onToggleWishlist={handleToggleWishlist}

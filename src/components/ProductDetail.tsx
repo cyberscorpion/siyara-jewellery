@@ -36,7 +36,7 @@ export function ProductDetail({ product, open, onOpenChange, isWishlisted, onTog
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto p-0">
+      <DialogContent className="max-w-7xl lg:max-w-[90vw] xl:max-w-[85vw] 2xl:max-w-[80vw] max-h-[90vh] overflow-y-auto p-0">
         <button
           onClick={() => onOpenChange(false)}
           className="absolute right-4 top-4 z-50 p-2 rounded-full bg-background/90 backdrop-blur-sm hover:bg-background transition-colors"
