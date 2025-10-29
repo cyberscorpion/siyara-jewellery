@@ -41,6 +41,14 @@ export function Header({
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
   };
+
+  const handleWishlistClick = () => {
+    onWishlistClick();
+    // Scroll to top when opening wishlist
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
   return (
     <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-amber-600/20 px-2 lg:px-4 py-3">
       <motion.button
@@ -148,7 +156,7 @@ export function Header({
 
         {/* Wishlist Button */}
         <motion.button
-          onClick={onWishlistClick}
+          onClick={handleWishlistClick}
           className="relative flex max-w-[480px] cursor-pointer items-center justify-center overflow-visible rounded-full h-10 w-10 bg-amber-600/20 text-amber-600 hover:bg-amber-600/30 transition-colors"
           whileTap={{ scale: 0.95 }}
         >
