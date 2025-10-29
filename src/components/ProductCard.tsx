@@ -1,3 +1,4 @@
+import React from 'react';
 import { Heart } from '@phosphor-icons/react';
 import { Product } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
@@ -13,62 +14,59 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, onProductClick, isWishlisted, onToggleWishlist }: ProductCardProps) {
+  const handleWhatsAppOrder = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const message = `Hi! I'm interested in ${product.name} - ₹${product.price.toLocaleString('en-IN')}`;
+    const whatsappUrl = `https://wa.me/message/JKJPRWTKTRQ5B1?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.3 }}
-    >
-      <Card className="group relative overflow-hidden cursor-pointer border-border/50 hover:shadow-2xl transition-shadow duration-300">
-        <div className="relative aspect-[4/5] overflow-hidden bg-secondary/30" onClick={() => onProductClick(product)}>
-          <img
-            src={product.images[0]}
-            alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            loading="lazy"
+    <div className="flex flex-col gap-3 pb-3 group">
+      <div className="relative w-full overflow-hidden bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl">
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 cursor-pointer"
+          style={{ backgroundImage: `url("${product.images[0]}")` }}
+          onClick={() => onProductClick(product)}
+        />
+        <motion.button
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleWishlist(product.id);
+          }}
+          className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/70 backdrop-blur-sm text-amber-600 transition hover:bg-white"
+          whileTap={{ scale: 0.9 }}
+        >
+          <Heart
+            weight={isWishlisted ? 'fill' : 'regular'}
+            className={cn(
+              'transition-colors',
+              isWishlisted ? 'text-amber-600' : 'text-amber-600'
+            )}
+            size={18}
           />
-          {product.isNew && (
-            <Badge className="absolute top-4 left-4 bg-accent text-accent-foreground border-0 uppercase tracking-wider text-xs">
-              New
-            </Badge>
-          )}
-          <motion.button
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleWishlist(product.id);
-            }}
-            className="absolute top-4 right-4 p-2.5 bg-background/90 backdrop-blur-sm rounded-full hover:bg-background transition-colors"
-            whileTap={{ scale: 0.9 }}
-          >
-            <Heart
-              weight={isWishlisted ? 'fill' : 'regular'}
-              className={cn(
-                'transition-colors',
-                isWishlisted ? 'text-accent' : 'text-foreground'
-              )}
-              size={20}
-            />
-          </motion.button>
-        </div>
-        
-        <div className="p-6 space-y-3" onClick={() => onProductClick(product)}>
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="text-lg font-medium text-foreground leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              {product.name}
-            </h3>
-          </div>
-          
-          <div className="flex items-center justify-between">
-            <p className="text-xl font-semibold text-primary" style={{ fontFamily: 'var(--font-body)' }}>
-              ₹{product.price.toLocaleString('en-IN')}
-            </p>
-            <span className="text-sm text-muted-foreground uppercase tracking-wide" style={{ fontFamily: 'var(--font-body)' }}>
-              {product.category}
-            </span>
-          </div>
-        </div>
-      </Card>
-    </motion.div>
+        </motion.button>
+        {product.isNew && (
+          <Badge className="absolute top-3 left-3 bg-amber-600 text-white border-0 uppercase tracking-wider text-xs">
+            New
+          </Badge>
+        )}
+      </div>
+      
+      <div>
+        <p className="text-foreground text-base font-medium leading-normal cursor-pointer" onClick={() => onProductClick(product)}>
+          {product.name}
+        </p>
+        <p className="text-amber-600 text-sm font-normal leading-normal">
+          ₹{product.price.toLocaleString('en-IN')}
+        </p>
+        <button 
+          onClick={handleWhatsAppOrder}
+          className="w-full mt-2 text-sm font-bold bg-amber-600/20 text-amber-600 hover:bg-amber-600/30 rounded h-9 transition-colors"
+        >
+          Order on WhatsApp
+        </button>
+      </div>
+    </div>
   );
 }

@@ -27,27 +27,45 @@ export function HomeView({
 
   return (
     <div className="space-y-12">
-      <section className="relative py-16 md:py-24 px-4">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 to-transparent -z-10" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center space-y-6 max-w-3xl mx-auto"
+      {/* Hero Section */}
+      <section className="relative">
+        <div className="min-h-[480px] flex flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-center justify-center p-4"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDWDBuNt-G3adnDGKrwvS8nYlwbkrcOmGeeEq89_B6OObjTKAeZFjz6aJtry1kf1g8fyKu2mN_H5YiPr-VSBUv7Nfy6bNCsArKYTmNKF9-BkqWJHhSXW5tltFhxRN33NE8PNTRJiC81KYjlP-Fid7rS_dAcfpmseT07Qcv5fDaj1utxWG6QKdR_8BofOXWERd-FeApgSoyV3tpzR_i2SnRCx-ZMIKIBgTj_GErghxzUhLYMBnsHsyxvAr-OwIKzlci29xvE6Nk48pA")`
+          }}
         >
-          <div className="flex items-center justify-center gap-3">
-            <Sparkle size={32} weight="fill" className="text-accent" />
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground" style={{ fontFamily: 'var(--font-display)' }}>
-              Siyara
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col gap-2 text-center"
+          >
+            <h1 className="text-white text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl">
+              Elegance Redefined
             </h1>
-            <Sparkle size={32} weight="fill" className="text-accent" />
-          </div>
-          <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed" style={{ fontFamily: 'var(--font-body)' }}>
-            Discover exquisite artificial jewellery crafted with elegance and precision
-          </p>
-        </motion.div>
+            <h2 className="text-white text-sm font-normal leading-normal md:text-base">
+              Discover exquisite artificial jewellery crafted with elegance and precision
+            </h2>
+          </motion.div>
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 md:h-12 md:px-5 bg-amber-600 text-white text-sm font-bold leading-normal tracking-[0.015em] md:text-base hover:opacity-90 transition-opacity"
+            onClick={() => {
+              document.getElementById('collections')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            <span className="truncate">Shop Now</span>
+          </motion.button>
+        </div>
       </section>
 
-      <section className="space-y-8">
+      {/* Collections Section */}
+      <section id="collections" className="space-y-8">
+        <h2 className="text-foreground text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+          Our Collections
+        </h2>
+        
         <CategoryFilter
           selectedCategory={selectedCategory}
           onCategoryChange={onCategoryChange}
@@ -69,7 +87,7 @@ export function HomeView({
             </motion.div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 px-4 md:px-6 lg:px-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:gap-6 p-4">
             {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}

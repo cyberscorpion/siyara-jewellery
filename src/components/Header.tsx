@@ -2,6 +2,7 @@ import { Heart, ShoppingBag } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
+import iconImage from '@/assets/icons/icon.png';
 
 interface HeaderProps {
   wishlistCount: number;
@@ -12,40 +13,52 @@ interface HeaderProps {
 
 export function Header({ wishlistCount, onWishlistClick, onLogoClick, isWishlistView }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/40 bg-background/80 backdrop-blur-lg">
-      <div className="container mx-auto px-4 md:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between">
-          <motion.button
-            onClick={onLogoClick}
-            className="flex items-center gap-3 group"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center">
-              <ShoppingBag size={20} weight="bold" className="text-primary-foreground" />
-            </div>
-            <h1 className="text-3xl font-bold text-primary tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-              Siyara
-            </h1>
-          </motion.button>
-
-          <nav className="flex items-center gap-4">
-            <Button
-              variant={isWishlistView ? 'default' : 'ghost'}
-              size="lg"
-              onClick={onWishlistClick}
-              className="relative"
-            >
-              <Heart weight={isWishlistView ? 'fill' : 'regular'} size={20} />
-              <span className="hidden sm:inline ml-2">Wishlist</span>
-              {wishlistCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-accent text-accent-foreground border-0">
-                  {wishlistCount}
-                </Badge>
-              )}
-            </Button>
-          </nav>
+    <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-amber-600/20 px-2 lg:px-4 py-3">
+      <motion.button
+        onClick={onLogoClick}
+        className="flex items-center justify-center text-amber-600"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+      >
+        <div className="h-12">
+          <img 
+            src={iconImage} 
+            alt="Siyara Logo" 
+            className="h-full w-auto object-contain"
+          />
         </div>
+      </motion.button>
+
+      <div className="hidden md:flex flex-1 justify-center gap-8">
+        <div className="flex items-center gap-9">
+          <a className="text-foreground text-sm font-medium leading-normal hover:text-amber-600 transition-colors" href="#">
+            Home
+          </a>
+          <a className="text-foreground text-sm font-medium leading-normal hover:text-amber-600 transition-colors" href="#">
+            Collections
+          </a>
+          <a className="text-foreground text-sm font-medium leading-normal hover:text-amber-600 transition-colors" href="#">
+            About Us
+          </a>
+          <a className="text-foreground text-sm font-medium leading-normal hover:text-amber-600 transition-colors" href="#">
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <motion.button
+          onClick={onWishlistClick}
+          className="relative flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-amber-600/20 text-amber-600 hover:bg-amber-600/30 transition-colors"
+          whileTap={{ scale: 0.95 }}
+        >
+          <Heart weight={isWishlistView ? 'fill' : 'regular'} size={20} />
+          {wishlistCount > 0 && (
+            <div className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-amber-600 text-xs font-bold text-white">
+              {wishlistCount}
+            </div>
+          )}
+        </motion.button>
       </div>
     </header>
   );
