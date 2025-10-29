@@ -9,6 +9,7 @@ import { PRODUCTS, WHATSAPP_URL } from '@/lib/products';
 import { Product, Category } from '@/lib/types';
 import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
+import iconSImage from '@/assets/icons/iconS.png';
 
 function App() {
   // Custom hook for localStorage persistence
@@ -145,7 +146,7 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
               <img 
-                src="/src/assets/icons/iconS.png" 
+                src={iconSImage} 
                 alt="Siyara Logo" 
                 className="h-12 w-12 mx-auto md:mx-0 mb-3"
               />

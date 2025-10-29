@@ -3,6 +3,7 @@ import { ProductCard } from './ProductCard';
 import { CategoryFilter } from './CategoryFilter';
 import { motion } from 'framer-motion';
 import { Sparkle, Lightbulb, Storefront, Users, Diamond, Leaf, Infinity, Heart } from '@phosphor-icons/react';
+import ownerImage from '@/assets/icons/owner.jpg';
 
 interface HomeViewProps {
   products: Product[];
@@ -267,7 +268,7 @@ export function HomeView({
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="h-48 w-48 rounded-full object-cover shrink-0 border-4 border-white shadow-lg" 
-            src="/src/assets/icons/owner.jpg" 
+            src={ownerImage} 
             alt="Founder portrait"
           />
           <div className="text-center md:text-left">
