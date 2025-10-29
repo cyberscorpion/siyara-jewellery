@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Product } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,7 +7,7 @@ import { Slider } from '@/components/ui/slider';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { SlidersHorizontal, ChevronDown, X } from '@phosphor-icons/react';
+import { SlidersHorizontal, CaretDown, X } from '@phosphor-icons/react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface FilterState {
@@ -82,7 +82,7 @@ export function ProductFilters({
     <Collapsible open={isOpen} onOpenChange={onToggle}>
       <CollapsibleTrigger className="flex items-center justify-between w-full p-3 hover:bg-muted/50 rounded-lg transition-colors">
         <span className="font-medium text-sm">{title}</span>
-        <ChevronDown 
+        <CaretDown 
           size={16} 
           className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} 
         />
@@ -102,14 +102,16 @@ export function ProductFilters({
         onToggle={() => toggleSection('price')}
       >
         <div className="space-y-4">
-          <Slider
-            value={filters.priceRange}
-            onValueChange={(value) => updateFilters({ priceRange: value as [number, number] })}
-            min={priceRange.min}
-            max={priceRange.max}
-            step={50}
-            className="w-full"
-          />
+          <div className="px-2">
+            <Slider
+              value={filters.priceRange}
+              onValueChange={(value) => updateFilters({ priceRange: value as [number, number] })}
+              min={priceRange.min}
+              max={priceRange.max}
+              step={50}
+              className="w-full"
+            />
+          </div>
           <div className="flex justify-between text-sm text-muted-foreground">
             <span>₹{filters.priceRange[0].toLocaleString('en-IN')}</span>
             <span>₹{filters.priceRange[1].toLocaleString('en-IN')}</span>

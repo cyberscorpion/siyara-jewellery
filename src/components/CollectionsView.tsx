@@ -1,13 +1,15 @@
 import { Product, Category } from '@/lib/types';
 import { ProductCard } from './ProductCard';
 import { CategoryFilter } from './CategoryFilter';
+import { ProductFilters, FilterState } from './ProductFilters';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useProductSearch } from '@/hooks/useProductSearch';
+import { useProductFilters } from '@/hooks/useProductFilters';
 import { motion } from 'framer-motion';
 import { MagnifyingGlass, X } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 interface CollectionsViewProps {
   products: Product[];
@@ -25,13 +27,39 @@ export function CollectionsView({
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
   const { searchQuery, setSearchQuery, filteredProducts, searchStats } = useProductSearch(products);
 
-  // Filter by category first, then by search
-  const categoryFilteredProducts = selectedCategory === 'All' 
-    ? filteredProducts 
-    : filteredProducts.filter(p => p.category === selectedCategory);
+  // Initialize filters with default values
+  const [filters, setFilters] = useState<FilterState>(() => {
+    const prices = products.map(p => p.price);
+    return {
+      priceRange: [Math.min(...prices), Math.max(...prices)],
+      materials: [],
+      isNewOnly: false,
+      sortBy: 'name'
+    };
+  });
+
+  // Apply filters to search results
+  const { filteredProducts: filterResults, activeFilterCount } = useProductFilters(filteredProducts, filters);
+
+  // Filter by category last
+  const finalProducts = useMemo(() => {
+    return selectedCategory === 'All' 
+      ? filterResults 
+      : filterResults.filter(p => p.category === selectedCategory);
+  }, [filterResults, selectedCategory]);
 
   const clearSearch = () => {
     setSearchQuery('');
+  };
+
+  const clearFilters = () => {
+    const prices = products.map(p => p.price);
+    setFilters({
+      priceRange: [Math.min(...prices), Math.max(...prices)],
+      materials: [],
+      isNewOnly: false,
+      sortBy: 'name'
+    });
   };
 
   return (
@@ -101,84 +129,108 @@ export function CollectionsView({
         )}
       </motion.div>
 
-      {/* Category Filter */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        <CategoryFilter
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+      {/* Filters and Category Section */}
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Filters Sidebar */}
+        <ProductFilters
+          products={products}
+          filters={filters}
+          onFiltersChange={setFilters}
+          onClearFilters={clearFilters}
+          activeFilterCount={activeFilterCount}
         />
-      </motion.div>
 
-      {/* Results Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="space-y-6"
-      >
-        {/* Results Header */}
-        <div className="flex items-center justify-between px-4">
-          <h2 className="text-xl font-semibold text-foreground">
-            {selectedCategory === 'All' ? 'All Products' : selectedCategory}
-            <span className="ml-2 text-sm font-normal text-muted-foreground">
-              ({categoryFilteredProducts.length})
-            </span>
-          </h2>
-        </div>
+        {/* Main Content */}
+        <div className="flex-1 space-y-6">
+          {/* Category Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            <CategoryFilter
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+            />
+          </motion.div>
 
-        {/* Products Grid */}
-        {categoryFilteredProducts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[40vh] px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center space-y-4"
-            >
-              <MagnifyingGlass size={48} className="mx-auto text-muted-foreground" />
-              <h3 className="text-2xl font-semibold text-foreground">
-                {searchStats.hasQuery ? 'No products found' : 'No products available'}
-              </h3>
-              <p className="text-muted-foreground max-w-md">
-                {searchStats.hasQuery 
-                  ? 'Try adjusting your search terms or browse by category'
-                  : 'Check back later for new arrivals'
-                }
-              </p>
-              {searchStats.hasQuery && (
-                <Button 
-                  variant="outline" 
-                  onClick={clearSearch}
-                  className="mt-4"
+          {/* Results Section */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="space-y-6"
+          >
+            {/* Results Header */}
+            <div className="flex items-center justify-between px-4">
+              <h2 className="text-xl font-semibold text-foreground">
+                {selectedCategory === 'All' ? 'All Products' : selectedCategory}
+                <span className="ml-2 text-sm font-normal text-muted-foreground">
+                  ({finalProducts.length})
+                </span>
+              </h2>
+            </div>
+
+            {/* Products Grid */}
+            {finalProducts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center min-h-[40vh] px-4">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center space-y-4"
                 >
-                  Clear search
-                </Button>
-              )}
-            </motion.div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:gap-6 p-4">
-            {categoryFilteredProducts.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <ProductCard
-                  product={product}
-                  onProductClick={onProductClick}
-                  isWishlisted={wishlistedIds.includes(product.id)}
-                  onToggleWishlist={onToggleWishlist}
-                />
-              </motion.div>
-            ))}
-          </div>
-        )}
-      </motion.div>
+                  <MagnifyingGlass size={48} className="mx-auto text-muted-foreground" />
+                  <h3 className="text-2xl font-semibold text-foreground">
+                    {searchStats.hasQuery || activeFilterCount > 0 ? 'No products found' : 'No products available'}
+                  </h3>
+                  <p className="text-muted-foreground max-w-md">
+                    {searchStats.hasQuery || activeFilterCount > 0
+                      ? 'Try adjusting your search terms, filters, or browse by category'
+                      : 'Check back later for new arrivals'
+                    }
+                  </p>
+                  <div className="flex gap-2 justify-center">
+                    {searchStats.hasQuery && (
+                      <Button 
+                        variant="outline" 
+                        onClick={clearSearch}
+                      >
+                        Clear search
+                      </Button>
+                    )}
+                    {activeFilterCount > 0 && (
+                      <Button 
+                        variant="outline" 
+                        onClick={clearFilters}
+                      >
+                        Clear filters
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 lg:gap-6 p-4">
+                {finalProducts.map((product, index) => (
+                  <motion.div
+                    key={product.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <ProductCard
+                      product={product}
+                      onProductClick={onProductClick}
+                      isWishlisted={wishlistedIds.includes(product.id)}
+                      onToggleWishlist={onToggleWishlist}
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

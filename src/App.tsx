@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { HomeView } from '@/components/HomeView';
 import { WishlistView } from '@/components/WishlistView';
 import { CollectionsView } from '@/components/CollectionsView';
+import { MobileBottomNav } from '@/components/MobileBottomNav';
 import { ProductDetail } from '@/components/ProductDetail';
 import { PRODUCTS } from '@/lib/products';
 import { Product, Category } from '@/lib/types';
@@ -73,7 +74,7 @@ function App() {
           currentView={currentView}
         />
 
-        <main className="mt-8">
+        <main className="mt-8 pb-20 md:pb-8">`
           {currentView === 'home' ? (
             <HomeView
               products={PRODUCTS}
@@ -107,9 +108,18 @@ function App() {
           isWishlisted={selectedProduct ? wishlistedIds.includes(selectedProduct.id) : false}
           onToggleWishlist={handleToggleWishlist}
         />
+
+        {/* Mobile Bottom Navigation */}
+        <MobileBottomNav
+          currentView={currentView}
+          onHomeClick={handleLogoClick}
+          onCollectionsClick={handleCollectionsClick}
+          onWishlistClick={handleWishlistClick}
+          wishlistCount={wishlistedIds.length}
+        />
       </div>
 
-      <footer className="mt-16 border-t border-amber-600/20 pt-8 pb-4">
+      <footer className="mt-16 border-t border-amber-600/20 pt-8 pb-4 mb-16 md:mb-0">`
         <div className="container mx-auto max-w-6xl px-4 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
             <div>
@@ -141,7 +151,7 @@ function App() {
             </div>
           </div>
           <div className="mt-8 text-center text-xs text-muted-foreground">
-            <p>© 2024 Siyara. All rights reserved.</p>
+            <p>© 2025 Siyara. All rights reserved.</p>
           </div>
         </div>
       </footer>
