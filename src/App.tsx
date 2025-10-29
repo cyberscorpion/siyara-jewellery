@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useKV } from '@github/spark/hooks';
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HomeView } from '@/components/HomeView';
 import { WishlistView } from '@/components/WishlistView';
@@ -10,25 +9,35 @@ import { Toaster } from '@/components/ui/sonner';
 import { toast } from 'sonner';
 
 function App() {
-  const [wishlistedIds, setWishlistedIds] = useKV<string[]>('wishlist', []);
+  // Custom hook for localStorage persistence
+  const [wishlistedIds, setWishlistedIds] = useState<string[]>(() => {
+    try {
+      const stored = localStorage.getItem('wishlist');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Save to localStorage whenever wishlistedIds changes
+  useEffect(() => {
+    localStorage.setItem('wishlist', JSON.stringify(wishlistedIds));
+  }, [wishlistedIds]);
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isProductDetailOpen, setIsProductDetailOpen] = useState(false);
   const [currentView, setCurrentView] = useState<'home' | 'wishlist'>('home');
 
-  const safeWishlist = wishlistedIds ?? [];
-
   const handleToggleWishlist = (productId: string) => {
     setWishlistedIds((current) => {
-      const currentList = current ?? [];
-      const isCurrentlyWishlisted = currentList.includes(productId);
+      const isCurrentlyWishlisted = current.includes(productId);
       
       if (isCurrentlyWishlisted) {
         toast.success('Removed from wishlist');
-        return currentList.filter(id => id !== productId);
+        return current.filter(id => id !== productId);
       } else {
         toast.success('Added to wishlist');
-        return [...currentList, productId];
+        return [...current, productId];
       }
     });
   };
@@ -51,7 +60,7 @@ function App() {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto max-w-6xl px-4 lg:px-8">
         <Header
-          wishlistCount={safeWishlist.length}
+          wishlistCount={wishlistedIds.length}
           onWishlistClick={handleWishlistClick}
           onLogoClick={handleLogoClick}
           isWishlistView={currentView === 'wishlist'}
@@ -64,7 +73,7 @@ function App() {
               selectedCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
               onProductClick={handleProductClick}
-              wishlistedIds={safeWishlist}
+              wishlistedIds={wishlistedIds}
               onToggleWishlist={handleToggleWishlist}
             />
           ) : (
@@ -72,7 +81,7 @@ function App() {
               products={PRODUCTS}
               onProductClick={handleProductClick}
               onToggleWishlist={handleToggleWishlist}
-              wishlistedIds={safeWishlist}
+              wishlistedIds={wishlistedIds}
             />
           )}
         </main>
@@ -81,7 +90,7 @@ function App() {
           product={selectedProduct}
           open={isProductDetailOpen}
           onOpenChange={setIsProductDetailOpen}
-          isWishlisted={selectedProduct ? safeWishlist.includes(selectedProduct.id) : false}
+          isWishlisted={selectedProduct ? wishlistedIds.includes(selectedProduct.id) : false}
           onToggleWishlist={handleToggleWishlist}
         />
       </div>
