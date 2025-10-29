@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us - Aura Jewels</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Playfair+Display:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+      .font-serif { font-family: 'Playfair Display', serif; }
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#D9B3A8",
+              "background-light": "#F9F6F2",
+              "background-dark": "#221019",
+              "text-light": "#333333",
+              "text-dark": "#F9F6F2",
+              "accent-light": "#BFA169",
+              "accent-dark": "#D9B3A8",
+              "muted-light": "#666666",
+              "muted-dark": "#a09893",
+              "border-light": "#EAE5DF",
+              "border-dark": "#443a36",
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"],
+              "serif": ["Playfair Display", "serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 md:px-10 py-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent-light dark:text-accent-dark text-2xl">diamond</span>
+<h2 class="font-serif text-lg font-bold leading-tight tracking-wide">Aura Jewels</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="#">Home</a>
+<a class="text-sm font-medium leading-normal hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="#">Collections</a>
+<a class="text-sm font-medium leading-normal text-accent-light dark:text-accent-dark" href="#">About Us</a>
+<a class="text-sm font-medium leading-normal hover:text-accent-light dark:hover:text-accent-dark transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/20 text-text-light dark:text-text-dark hover:bg-primary/40 transition-colors">
+<span class="material-symbols-outlined text-xl">favorite_border</span>
+</button>
+<button class="flex h-10 w-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-primary/20 text-text-light dark:text-text-dark hover:bg-primary/40 transition-colors">
+<span class="material-symbols-outlined text-xl">shopping_bag</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center">
+<div class="w-full max-w-5xl px-6 md:px-10 py-12 md:py-20">
+<!-- HeroSection -->
+<div class="@container">
+<div class="@[480px]:p-4">
+<div class="flex min-h-[60vh] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4 text-center" data-alt="Close up image of an artisan's hands carefully crafting a delicate piece of jewelry with specialized tools." style='background-image: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOXk9JzgyXWkyKdNqrzyeOu0wu4TFDP_otGuNqB93Iq-S_F0OWmiikc6n1nhQRICMuqAuIvFm7dCerERoPfblt_AWDeDJ5Hg9w2SPHLHvpe_ncpUlsTAWGjptDmHtGBVW7sO-pBc8wCT8WyQSciRzStuwsyN2WgJMZY_XlTEWLP8OBBSVlQrg7jeeYg28izF2O8v6SDMXhIF3sxc_MzOuKPuP11J7MjRqsA3Ar_fkWMOSLNEjcmOdp0iZ3V_4d6HDVliePqtFRfG8");'>
+<div class="flex flex-col gap-4">
+<h1 class="font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
+                                    Where Artistry Meets Adornment
+                                </h1>
+<h2 class="text-base font-normal leading-normal text-white/90 md:text-lg">
+                                    Discover timeless elegance crafted with passion and precision.
+                                </h2>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Our Story -->
+<section class="py-16 md:py-24">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="flex-1">
+<h2 class="font-serif text-3xl font-bold tracking-tight text-accent-light dark:text-accent-dark md:text-4xl">Our Story</h2>
+<p class="mt-4 text-base leading-relaxed text-muted-light dark:text-muted-dark">Aura Jewels began with a simple vision: to create beautiful, high-quality artificial jewelry that feels as special as the person wearing it. Founded in a small studio, our passion for design and dedication to craftsmanship has driven our journey from a humble idea to a cherished brand. We believe that everyone deserves to shine, and our collections are designed to empower and inspire with every piece.</p>
+</div>
+<div class="w-full md:w-1/3">
+<!-- Timeline -->
+<div class="grid grid-cols-[32px_1fr] gap-x-4">
+<div class="flex flex-col items-center gap-1 pt-2">
+<div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">lightbulb</span>
+</div>
+<div class="w-px grow bg-border-light dark:border-border-dark"></div>
+</div>
+<div class="flex flex-1 flex-col pb-6">
+<p class="font-bold">The Spark of an Idea</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">2018</p>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-px h-2 bg-border-light dark:border-border-dark"></div>
+<div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">storefront</span>
+</div>
+<div class="w-px grow bg-border-light dark:border-border-dark"></div>
+</div>
+<div class="flex flex-1 flex-col pb-6">
+<p class="font-bold">First Collection Launch</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">2019</p>
+</div>
+<div class="flex flex-col items-center gap-1">
+<div class="w-px h-2 bg-border-light dark:border-border-dark"></div>
+<div class="flex h-6 w-6 items-center justify-center rounded-full bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">groups</span>
+</div>
+</div>
+<div class="flex flex-1 flex-col">
+<p class="font-bold">A Global Community</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">2023</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FeatureSection: Mission & Values -->
+<section class="py-16 md:py-24 bg-primary/10 dark:bg-primary/5 rounded-xl">
+<div class="flex flex-col gap-10 px-6 md:px-10 @container">
+<div class="text-center">
+<h2 class="font-serif text-3xl font-bold tracking-tight text-accent-light dark:text-accent-dark md:text-4xl">
+                                Our Mission &amp; Values
+                            </h2>
+<p class="mt-4 text-base leading-relaxed text-muted-light dark:text-muted-dark max-w-3xl mx-auto">
+                                We are dedicated to creating exquisite jewelry that empowers and inspires. Our principles guide every piece we craft.
+                            </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-0">
+<div class="flex flex-1 flex-col gap-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 text-center items-center">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-accent-light dark:text-accent-dark"><span class="material-symbols-outlined text-2xl">diamond</span></div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Exquisite Craftsmanship</h3>
+<p class="text-sm leading-relaxed text-muted-light dark:text-muted-dark">Each piece is handcrafted with meticulous attention to detail by skilled artisans.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 text-center items-center">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-accent-light dark:text-accent-dark"><span class="material-symbols-outlined text-2xl">eco</span></div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Sustainable Materials</h3>
+<p class="text-sm leading-relaxed text-muted-light dark:text-muted-dark">We are committed to using ethically sourced and high-quality materials.</p>
+</div>
+</div>
+<div class="flex flex-1 flex-col gap-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 text-center items-center">
+<div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20 text-accent-light dark:text-accent-dark"><span class="material-symbols-outlined text-2xl">all_inclusive</span></div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold">Timeless Design</h3>
+<p class="text-sm leading-relaxed text-muted-light dark:text-muted-dark">Our designs transcend trends, offering enduring style for every occasion.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Founder's Note -->
+<section class="py-16 md:py-24">
+<div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 bg-primary/5 dark:bg-primary/10 rounded-xl p-8 md:p-12">
+<img class="h-48 w-48 rounded-full object-cover shrink-0 border-4 border-white dark:border-background-dark shadow-lg" data-alt="Professional portrait of the founder, a smiling woman with elegant jewelry." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0tZ6uAHXMW6aZkIyapTesdiKnI6SX_PSNv04ZFefF2T3v_MdNzA3KBkyyCcAFB25jOESVeVLCye1lashEGkq-Y7hIvdeDgu6RgwWqYJU3Qjb73DvhQy05ZA4HNvrR0HnFWRTsEe435XGVC2GAy9WHqx-1qqkgi3KMtB_nT7D_PtzEyvzljoqP0ZnaIvqPs1-p0_LQXTX9ak4R3wwibw0AdJVnNnh7QKkM5BzIQg6F3T82TR0MDqr5C8cFOxcopjbm71ffXBIlKuI"/>
+<div class="text-center md:text-left">
+<h2 class="font-serif text-3xl font-bold tracking-tight md:text-4xl text-accent-light dark:text-accent-dark">A Note From Our Founder</h2>
+<p class="mt-4 text-base italic leading-relaxed text-muted-light dark:text-muted-dark">"Jewelry is more than an accessory; it's a form of self-expression, a whisper of a story. My dream was to craft pieces that not only adorn but also empower. Thank you for being a part of our journey and letting our creations become a part of yours."</p>
+<p class="mt-6 font-serif text-xl font-bold">Jane Doe</p>
+<p class="text-sm text-muted-light dark:text-muted-dark">Founder &amp; Creative Director</p>
+</div>
+</div>
+</section>
+<!-- Section: Craftsmanship Gallery -->
+<section class="py-16 md:py-24">
+<div class="text-center">
+<h2 class="font-serif text-3xl font-bold tracking-tight text-accent-light dark:text-accent-dark md:text-4xl">The Art of Craft</h2>
+<p class="mt-4 text-base leading-relaxed text-muted-light dark:text-muted-dark max-w-3xl mx-auto">
+                            From the initial sketch to the final polish, every Aura jewel is a testament to our commitment to quality. We blend traditional techniques with modern innovation to create pieces that are both beautiful and enduring.
+                        </p>
+</div>
+<div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+<img class="aspect-square w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105" data-alt="Close up of a gemstone being set into a ring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdcFWNDNF_3HKSed9z28X8vpGdapRcaLovePCI5GpEK3w5VCaWQmoQ6c5vjUDBT18gFIUodxdRr3tQbMI68P20KgisvcnJgCH4kSfCBMb0RdyqMnaSIZu_ZpKu1n87kFtb14XHvn601Pg6vVePy22y0usi558kLnWogpxzEwFOteeSkbvKhA6wvdw0F9DBcfGZcgplGC3LyeoleaVNJ2kmTTde8bHZGPJRqw5gd2KY8Vd6QqsUO5crb5OAyn9ukWuswIwuxHltXvw"/>
+<img class="aspect-square w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105" data-alt="Artisan polishing a finished necklace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFKfiYOZaRAb3kQATY54yWmbol9E9lmGwpv4Ww4kTJLlkVxv_SG62axaULblSfouJD77b8a4u_ZFRcB4t7vFSdl726vIjAG4XomRW0D6wFY8P07hQvIZdn3Y0F0hXyTGrRFDKMUti54qliWu9C5iu6KdVENYWznwttRDy-g2mhu8JyNyrYtHpd9JDVU7s-m_LrihXxFjgbQ6Jq05E1Oz1LsOncF_YZ4wDzHNnEtgbjZNdhEVjbbzVq2Nm23EvkraNhcHSWgxSKMgs"/>
+<img class="aspect-square w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105" data-alt="Detailed sketch of a new jewelry design on a workbench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm7wPTwCwRpeNn6YYORhAYvkYo8jezeohGiqecJnrATVGKQmOKtW24eEsq_f56p3PznKLzwpTUnuPIduC-aoy2ZZhhjajVczjB2LCEe2-3othGyOOu5SSUnbN8htm2LWFgpX4EieNyAmPeXBeZ9iEellDiFQO9-JQxD_eew67fJNqtfjhqkHzfFgo_scJZCZ3vgZHYcwHQ9Zf8mtsalSeNLXIWjG6Y5D_BoZ67HVNrobzlybfEiUWgmc_aAR8yFgZqzEC9RkRJcpQ"/>
+<img class="aspect-square w-full rounded-lg object-cover transition-transform duration-300 hover:scale-105" data-alt="A finished pair of elegant golden earrings on a display." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAObwR8H4kWdbKzhhVOE4QEbyPh1cT8UsEesV5jg-BR6SLqxej--D9RJX16oQjpre-8KRiQX1QgT5h5NhV0BIM9k6QAzqtPlNOxialwnUxEz7Hoyq6E0HN4uigatLgztEMSx4XPEYK5o8C0gAfeqnX8aD3hThomns5ca4FUonPU2yfd5-WQ480Lx9V_41Ds4VT9Y4155RtSEy_AHq7yqSbcfcTgUJ0u0TEO0NgpTbv5KaYWhVybqT2Qn7peU-vRnhEQDltmlK0IzIk"/>
+</div>
+</section>
+<!-- CTA -->
+<section class="text-center py-12">
+<h2 class="font-serif text-3xl font-bold tracking-tight">Discover Your Radiance</h2>
+<p class="mt-4 max-w-2xl mx-auto text-muted-light dark:text-muted-dark">Inspired by our story? Explore our collections and find the piece that tells yours.</p>
+<button class="mt-8 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-8 bg-accent-light dark:bg-accent-dark text-white font-bold leading-normal tracking-wide mx-auto hover:opacity-90 transition-opacity">
+<span class="truncate">Explore Our Collections</span>
+</button>
+</section>
+</div>
+</main>
+</div>
+</body></html>
